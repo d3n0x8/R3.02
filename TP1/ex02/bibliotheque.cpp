@@ -27,12 +27,17 @@ void Bibliotheque::supprimerLivre(Livre livre) {
 }
 
 void Bibliotheque::afficheLivre() {
+  cout << "\nListe des livres de la bibliothèque : " << endl;
+  if (nbrLivres == 0) {
+    cout << "\nAucun livre dans la bibliothèque !\n" << endl;
+  }
   for (int i = 0; i < nbrLivres; i++) {
     cout << "Titre: " << livres[i].getTitre()
          << " ; auteur: " << livres[i].getAuteur()
          << " ; date de parution: " << livres[i].getAnneeParution()
          << " ; nombre de pages: " << livres[i].getNbrPages() << endl;
   }
+  cout << endl;
 }
 
 void Bibliotheque::rechercherLivre(string titre) {
@@ -45,5 +50,5 @@ void Bibliotheque::rechercherLivre(string titre) {
       return;
     }
   }
-  cout << "Le livre demandé n'existe pas !" << endl; // If not found
+  cout << "Le livre demandé n'existe pas !" << endl;
 }

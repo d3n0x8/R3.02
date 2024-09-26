@@ -1,4 +1,5 @@
 #include "bibliotheque.hpp"
+#include <cstdio>
 #include <iostream>
 
 int menu() {
@@ -44,10 +45,11 @@ int main() {
       if (!verifBiblioPleine(bibliotheque)) {
         break;
       }
+      cin.ignore();
       cout << "Saisissez le titre: ";
-      cin >> titre;
+      getline(cin, titre);
       cout << "Saisissez l'auteur: ";
-      cin >> auteur;
+      getline(cin, auteur);
       cout << "Saisissez l'année de parution: ";
       cin >> anneeParution;
       cout << "Saisissez le nombre de pages: ";
@@ -63,7 +65,7 @@ int main() {
       if (!verifBilbioVide(bibliotheque)) {
         break;
       }
-      cout << "Saisissez le titre: ";
+      cout << "Saisissez le titre du livre à supprimer: ";
       cin >> titre;
       cout << "Saisissez l'auteur: ";
       cin >> auteur;
