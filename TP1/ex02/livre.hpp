@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <string>
 using namespace std;
 
@@ -12,6 +13,7 @@ private:
 public:
   Livre();
   Livre(string titre, string auteur, int anneeParution, int nbrPages);
+  ~Livre();
   string getTitre();
   string getAuteur();
   int getAnneeParution();

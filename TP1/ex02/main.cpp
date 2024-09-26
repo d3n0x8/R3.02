@@ -45,11 +45,10 @@ int main() {
       if (!verifBiblioPleine(bibliotheque)) {
         break;
       }
-      cin.ignore();
       cout << "Saisissez le titre: ";
-      getline(cin, titre);
+      cin >> titre;
       cout << "Saisissez l'auteur: ";
-      getline(cin, auteur);
+      cin >> auteur;
       cout << "Saisissez l'année de parution: ";
       cin >> anneeParution;
       cout << "Saisissez le nombre de pages: ";

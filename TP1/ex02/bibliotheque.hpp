@@ -9,6 +9,7 @@ private:
 
 public:
   Bibliotheque();
+  ~Bibliotheque();
   int size();
   void ajouterLivre(Livre livre);
   void supprimerLivre(Livre livre);
