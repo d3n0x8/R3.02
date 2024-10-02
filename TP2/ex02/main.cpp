@@ -1,4 +1,5 @@
 #include "mediatheque.hpp"
+#include <algorithm>
 #include <cstdio>
 #include <iostream>
 
@@ -34,64 +35,7 @@ int verifChoix(int choix, int limit, int limit2) {
   return choix;
 }
 
-void ajoutLivre(Mediatheque &mediatheque) {
-  string titre, auteur;
-  int anneeParution, nbrPages;
-  cout << "Saisissez le titre: ";
-  cin >> titre;
-  cout << "Saisissez l'auteur: ";
-  cin >> auteur;
-  cout << "Saisissez l'année de parution: ";
-  cin >> anneeParution;
-  cout << "Saisissez le nombre de pages: ";
-  cin >> nbrPages;
-  {
-    Livre *livre = new Livre(titre, auteur, anneeParution, nbrPages);
-    mediatheque.ajouterMedia(livre);
-    cout << "\n Le livre a bien été ajouté !\n " << endl;
-  }
-  return;
-}
-
-void ajoutDVD(Mediatheque &mediatheque) {
-  string titre, realisateur;
-  int anneeParution, duree;
-  cout << "Saisissez le titre: ";
-  cin >> titre;
-  cout << "Saisissez le realisateur: ";
-  cin >> realisateur;
-  cout << "Saisissez l'année de parution: ";
-  cin >> anneeParution;
-  cout << "Saisissez la duree en minutes: ";
-  cin >> duree;
-  {
-    DVD *dvd = new DVD(titre, realisateur, anneeParution, duree);
-    mediatheque.ajouterMedia(dvd);
-    cout << "\n Le DVD a bien été ajouté !\n " << endl;
-  }
-  return;
-}
-
-void ajoutVinyle(Mediatheque &mediatheque) {
-  string titre, artiste;
-  int anneeParution, duree;
-  cout << "Saisissez le titre: ";
-  cin >> titre;
-  cout << "Saisissez l'artiste: ";
-  cin >> artiste;
-  cout << "Saisissez l'année de parution: ";
-  cin >> anneeParution;
-  cout << "Saisissez la duree en minutes: ";
-  cin >> duree;
-  {
-    Vinyle *vinyle = new Vinyle(titre, artiste, anneeParution, duree);
-    mediatheque.ajouterMedia(vinyle);
-    cout << "\n Le Vinyle a bien été ajouté !\n " << endl;
-  }
-  return;
-}
-
-int verifBiblioPleine(Mediatheque mediatheque) {
+int verifBiblioPleine(Mediatheque &mediatheque) {
   if (mediatheque.size() == 50) {
     cout << "La bibliothèque est pleine ! \n" << endl;
     return 0;
@@ -99,17 +43,27 @@ int verifBiblioPleine(Mediatheque mediatheque) {
   return 1;
 }
 
-int verifBilbioVide(Mediatheque mediatheque) {
+int verifBilbioVide(Mediatheque &mediatheque) {
   if (mediatheque.size() == 0) {
-    cout << "La bibliothèque est vide ! \n" << endl;
+    cout << "\nLa bibliothèque est vide ! \n" << endl;
     return 0;
   }
   return 1;
 }
 
+string formaterMedia(string media) {
+  std::transform(media.begin(), media.end(), media.begin(), ::tolower);
+
+  if (!media.empty()) {
+    media[0] = toupper(media[0]);
+  }
+
+  return media;
+}
+
 int main() {
-  Mediatheque mediatheque;
-  string titre, auteur, realisateur, chanteur;
+  Mediatheque mediatheque = Mediatheque();
+  string titre, auteur, realisateur, chanteur, media, artiste;
   int anneeParution, nbrPages, nbrTitres, duree;
   int choix = menu();
   while (choix != 5) {
@@ -181,18 +135,17 @@ int main() {
       if (!verifBilbioVide(mediatheque)) {
         break;
       }
-      cout << "Saisissez le titre du livre à supprimer: ";
+      cout
+          << "Saisissez le type de media à supprimer: (Livre / DVD / Vinyle): ";
+      cin >> media;
+      cout << "Saisissez le titre: ";
       cin >> titre;
-      cout << "Saisissez l'auteur: ";
-      cin >> auteur;
-      cout << "Saisissez l'année de parution: ";
+      cout << "Saisissez l'artiste: ";
+      cin >> artiste;
+      cout << "Saisissez l'annee de parution: ";
       cin >> anneeParution;
-      cout << "Saisissez le nombre de pages: ";
-      cin >> nbrPages;
-      {
-        Livre livre(titre, auteur, anneeParution, nbrPages);
-        // mediatheque.supprimerMedia(livre);
-      }
+      media = formaterMedia(media);
+      mediatheque.supprimerMedia(media, titre, artiste, anneeParution);
       break;
 
     case 4:

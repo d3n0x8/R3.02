@@ -21,9 +21,11 @@ public:
   ~Livre(){};
 
   string getTitre() const override { return this->titre; };
-  string getAuteur() { return this->auteur; };
+  string getArtiste() const override { return this->auteur; };
+  int getAnnee() const override { return this->anneeParution; };
+  string getGenre() const override { return "Livre"; };
   string getInfo() const override {
-    return "Livre: " + titre + ", Auteur: " + auteur +
+    return "Titre livre: " + titre + ", Auteur: " + auteur +
            ", Annee de parution: " + to_string(anneeParution) +
            ", Nombre de pages: " + to_string(nbrPages);
   };

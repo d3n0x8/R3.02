@@ -22,7 +22,7 @@ public:
   ~Mediatheque() {
     for (int i = 0; i < this->nbrMedias; i++) {
       if (this->medias[i] != nullptr) {
-        this->medias[i] = nullptr;
+        cout << "Destruction de " << this->medias[i]->getInfo() << endl;
         delete this->medias[i];
       }
     }
@@ -37,31 +37,38 @@ public:
     }
   };
 
-  /*
-    void supprimerMedia(Media media) {
-      for (int i = 0; i < this->nbrMedias; i++) {
-        if (this->medias[i].getTitre() == livre.getTitre()) {
-          if (this->medias[i].getAuteur() == livre.getAuteur()) {
-            if ((livre.getAnneeParution(), this->medias[i].getAnneeParution()))
-    { if (this->medias[i].getNbrPages() == livre.getNbrPages()) { for (int j =
-    i; j < this->nbrMedias - 1; j++) { this->medias[j] = this->medias[j + 1];
-                }
-                this->nbrMedias--;
-                cout << "Le livre a bien été supprimé !" << endl;
-                return;
-              }
-            }
-          }
+  void supprimerMedia(string media, string titre, string artiste, int annee) {
+    for (int i = 0; i < this->nbrMedias; i++) {
+      if (this->medias[i]->getGenre() == media &&
+          this->medias[i]->getTitre() == titre &&
+          this->medias[i]->getArtiste() == artiste &&
+          this->medias[i]->getAnnee() == annee) {
+        delete this->medias[i];
+        this->nbrMedias--;
+        for (int j = i; j < this->nbrMedias; j++) {
+          this->medias[j] = this->medias[j + 1];
         }
-        cout << "Le livre n'a pas été supprimé !" << endl;
+        cout << "Le media a bien été supprimé !" << endl;
+        return;
       }
-    };
-  */
+    }
+    cout << "Le media demandé n'existe pas !" << endl;
+  };
 
   void afficherMedia() {
+    if (this->nbrMedias == 0) {
+      cout << "\n------------------------------" << endl;
+      cout << "  La bibliothèque est vide !" << endl;
+      cout << "------------------------------\n" << endl;
+      return;
+    }
+    cout << "\n------------------------------" << endl;
+    cout << "      Liste des medias " << endl;
+    cout << "------------------------------\n" << endl;
     for (int i = 0; i < this->nbrMedias; i++) {
       cout << medias[i]->getInfo() << endl;
     }
+    cout << endl;
   };
 
   void rechercherMedia(string titre) {

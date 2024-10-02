@@ -21,9 +21,12 @@ public:
   ~Vinyle(){};
 
   string getTitre() const override { return this->titre; };
+  string getArtiste() const override { return this->chanteur; };
+  int getAnnee() const override { return this->anneeParution; };
+  string getGenre() const override { return "Vinyle"; };
 
   string getInfo() const override {
-    return "Vinyle: " + titre + ", Chanteur: " + chanteur +
+    return "Titre vinyle: " + titre + ", Chanteur: " + chanteur +
            ", Annee de parution: " + to_string(anneeParution) +
            ", Nombre de titres: " + to_string(nbrTitres);
   };
