@@ -61,9 +61,92 @@ string formaterMedia(string media) {
   return media;
 }
 
+void ajoutDVD(Mediatheque &mediatheque) {
+  string titre, realisateur;
+  int anneeParution, duree;
+  cout << "Saisissez le titre: ";
+  cin >> titre;
+  cout << "Saisissez le réalisateur: ";
+  cin >> realisateur;
+  cout << "Saisissez l'année de sortie: ";
+  cin >> anneeParution;
+  cout << "Saisissez la durée (en minutes): ";
+  cin >> duree;
+  {
+    DVD *dvd = new DVD(titre, realisateur, anneeParution, duree);
+    mediatheque.ajouterMedia(dvd);
+    cout << "\n Le dvd a bien été ajouté !\n " << endl;
+  }
+}
+
+void ajoutLivre(Mediatheque &mediatheque) {
+  string titre, auteur;
+  int anneeParution, nbrPages;
+  cout << "Saisissez le titre: ";
+  cin >> titre;
+  cout << "Saisissez l'auteur: ";
+  cin >> auteur;
+  cout << "Saisissez l'année de parution: ";
+  cin >> anneeParution;
+  cout << "Saisissez le nombre de pages: ";
+  cin >> nbrPages;
+  {
+    Livre *livre = new Livre(titre, auteur, anneeParution, nbrPages);
+    mediatheque.ajouterMedia(livre);
+    cout << "\n Le livre a bien été ajouté !\n " << endl;
+  }
+}
+
+void ajoutVinyle(Mediatheque &mediatheque) {
+  string titre, chanteur;
+  int anneeParution, nbrTitres, duree;
+  cout << "Saisissez le titre: ";
+  cin >> titre;
+  cout << "Saisissez le chanteur: ";
+  cin >> chanteur;
+  cout << "Saisissez l'année de sortie: ";
+  cin >> anneeParution;
+  cout << "Saisissez le nombre de titres: ";
+  cin >> nbrTitres;
+  {
+    Vinyle *vinyle = new Vinyle(titre, chanteur, anneeParution, nbrTitres);
+    mediatheque.ajouterMedia(vinyle);
+    cout << "\n Le vinyle a bien été ajouté !\n " << endl;
+  }
+}
+
+void supprimerMedia(Mediatheque &mediatheque) {
+  string media, titre, artiste;
+  int anneeParution;
+  cout << "Saisissez le type de media à supprimer: (Livre / DVD / Vinyle): ";
+  cin >> media;
+  cout << "Saisissez le titre: ";
+  cin >> titre;
+  cout << "Saisissez l'artiste: ";
+  cin >> artiste;
+  cout << "Saisissez l'annee de parution: ";
+  cin >> anneeParution;
+  media = formaterMedia(media);
+  mediatheque.supprimerMedia(media, titre, artiste, anneeParution);
+}
+
+void rechercherMedia(Mediatheque &mediatheque) {
+  string media, titre, artiste;
+  int anneeParution;
+  cout << "Saisissez le type de media à rechercher: (Livre / DVD / Vinyle): ";
+  cin >> media;
+  cout << "Saisissez le titre: ";
+  cin >> titre;
+  cout << "Saisissez l'artiste: ";
+  cin >> artiste;
+  cout << "Saisissez l'annee de parution: ";
+  cin >> anneeParution;
+  media = formaterMedia(media);
+  mediatheque.rechercherMedia(media, titre, artiste, anneeParution);
+}
 int main() {
   Mediatheque mediatheque = Mediatheque();
-  string titre, auteur, realisateur, chanteur, media, artiste;
+  string titre, auteur, realisateur, chanteur, media, artiste, type;
   int anneeParution, nbrPages, nbrTitres, duree;
   int choix = menu();
   while (choix != 5) {
@@ -79,50 +162,13 @@ int main() {
         int choixAjout = menuAjout();
         switch (choixAjout) {
         case 1:
-          cout << "Saisissez le titre: ";
-          cin >> titre;
-          cout << "Saisissez l'auteur: ";
-          cin >> auteur;
-          cout << "Saisissez l'année de parution: ";
-          cin >> anneeParution;
-          cout << "Saisissez le nombre de pages: ";
-          cin >> nbrPages;
-          {
-            Livre *livre = new Livre(titre, auteur, anneeParution, nbrPages);
-            mediatheque.ajouterMedia(livre);
-            cout << "\n Le livre a bien été ajouté !\n " << endl;
-          }
+          ajoutLivre(mediatheque);
           break;
         case 2:
-          cout << "Saisissez le titre: ";
-          cin >> titre;
-          cout << "Saisissez le réalisateur: ";
-          cin >> realisateur;
-          cout << "Saisissez l'année de sortie: ";
-          cin >> anneeParution;
-          cout << "Saisissez la durée (en minutes): ";
-          cin >> duree;
-          {
-            DVD *dvd = new DVD(titre, realisateur, anneeParution, duree);
-            mediatheque.ajouterMedia(dvd);
-            cout << "\n Le dvd a bien été ajouté !\n " << endl;
-          }
+          ajoutDVD(mediatheque);
           break;
         case 3:
-          cout << "Saisissez le titre: ";
-          cin >> titre;
-          cout << "Saisissez le chanteur: ";
-          cin >> chanteur;
-          cout << "Saisissez l'année de sortie: ";
-          cin >> anneeParution;
-          cout << "Saisissez le nombre de titres: ";
-          cin >> nbrTitres;
-          {
-            Vinyle *vinyle =
-                new Vinyle(titre, chanteur, anneeParution, nbrTitres);
-            mediatheque.ajouterMedia(vinyle);
-            cout << "\n Le vinyle a bien été ajouté !\n " << endl;
-          }
+          ajoutVinyle(mediatheque);
           break;
         default:
           cout << "Choix invalide" << endl;
@@ -135,26 +181,14 @@ int main() {
       if (!verifBilbioVide(mediatheque)) {
         break;
       }
-      cout
-          << "Saisissez le type de media à supprimer: (Livre / DVD / Vinyle): ";
-      cin >> media;
-      cout << "Saisissez le titre: ";
-      cin >> titre;
-      cout << "Saisissez l'artiste: ";
-      cin >> artiste;
-      cout << "Saisissez l'annee de parution: ";
-      cin >> anneeParution;
-      media = formaterMedia(media);
-      mediatheque.supprimerMedia(media, titre, artiste, anneeParution);
+      supprimerMedia(mediatheque);
       break;
 
     case 4:
       if (!verifBilbioVide(mediatheque)) {
         break;
       }
-      cout << "Saisissez le titre du livre à trouver: ";
-      cin >> titre;
-      mediatheque.rechercherMedia(titre);
+      rechercherMedia(mediatheque);
       break;
 
     case 5:

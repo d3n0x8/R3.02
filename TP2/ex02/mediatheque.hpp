@@ -71,15 +71,19 @@ public:
     cout << endl;
   };
 
-  void rechercherMedia(string titre) {
+  void rechercherMedia(string media, string titre, string artiste, int annee) {
     for (int i = 0; i < this->nbrMedias; i++) {
-      if (medias[i]->getTitre() == titre) {
-        cout << medias[i]->getInfo() << endl;
+      if (this->medias[i]->getGenre() == media &&
+          this->medias[i]->getTitre() == titre &&
+          this->medias[i]->getArtiste() == artiste &&
+          this->medias[i]->getAnnee() == annee) {
+        cout << "Le media demandé existe bien dans la bibliothèque: " << endl;
+        cout << this->medias[i]->getInfo() << endl;
         return;
       }
     }
-    cout << "Le livre demandé n'existe pas !" << endl;
-  };
+    cout << "Le media demandé n'existe pas !" << endl;
+  }
 };
 
 #endif
