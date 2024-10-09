@@ -2,6 +2,7 @@
 #define MEDIATHEQUE_HPP
 
 #include "DVD.hpp"
+#include "chaine.hpp"
 #include "livre.hpp"
 #include "media.hpp"
 #include "vinyle.hpp"
@@ -9,44 +10,25 @@
 class Mediatheque {
 
 private:
-  const static int nombreMaximumMedia = 50;
-  Media *medias[nombreMaximumMedia];
-  int nbrMedias;
+  Chaine chaine;
 
 public:
-  Mediatheque() : nbrMedias(0) {
-    for (int i = 0; i < nombreMaximumMedia; i++) {
-      this->medias[i] = nullptr;
-    }
-  };
-  ~Mediatheque() {
-    for (int i = 0; i < this->nbrMedias; i++) {
-      if (this->medias[i] != nullptr) {
-        cout << "Destruction de " << this->medias[i]->getInfo() << endl;
-        delete this->medias[i];
-      }
-    }
-  }
+  Mediatheque() { Chaine chaine = Chaine(); };
+  ~Mediatheque() { chaine.vide(); }
 
-  int size() { return this->nbrMedias; };
-  int getNbrMedias() { return this->nbrMedias; };
-  void ajouterMedia(Media *media) {
-    if (this->nbrMedias < nombreMaximumMedia) {
-      this->medias[this->nbrMedias] = media;
-      this->nbrMedias++;
-    }
-  };
+  int size() { return this->chaine.longueur(); };
+  int getNbrMedias() { return this->chaine.longueur(); };
+  void ajouterMedia(Media *media) { chaine.adjtete(*media); };
 
   void supprimerMedia(string media, string titre, string artiste, int annee) {
-    for (int i = 0; i < this->nbrMedias; i++) {
-      if (this->medias[i]->getGenre() == media &&
-          this->medias[i]->getTitre() == titre &&
-          this->medias[i]->getArtiste() == artiste &&
-          this->medias[i]->getAnnee() == annee) {
-        delete this->medias[i];
-        this->nbrMedias--;
-        for (int j = i; j < this->nbrMedias; j++) {
-          this->medias[j] = this->medias[j + 1];
+    for (int i = 0; i < this->chaine.longueur(); i++) {
+      if (this->chaine.element(i)->getGenre() == media &&
+          this->chaine.element(i)->getTitre() == titre &&
+          this->chaine.element(i)->getArtiste() == artiste &&
+          this->chaine.element(i)->getAnnee() == annee) {
+        this->chaine.suppos(i);
+        for (int j = i; j < this->chaine.longueur(); j++) {
+          this->chaine.element(i)[j] = this->chaine.element(i)[j + 1];
         }
         cout << "Le media a bien été supprimé !" << endl;
         return;
@@ -56,29 +38,29 @@ public:
   };
 
   void afficherMedia() {
-    if (this->nbrMedias == 0) {
+    if (this->chaine.longueur() == 0) {
       cout << "\n------------------------------" << endl;
       cout << "  La bibliothèque est vide !" << endl;
       cout << "------------------------------\n" << endl;
       return;
     }
     cout << "\n------------------------------" << endl;
-    cout << "      Liste des medias " << endl;
+    cout << "      Liste des chaine.element(i) " << endl;
     cout << "------------------------------\n" << endl;
-    for (int i = 0; i < this->nbrMedias; i++) {
-      cout << medias[i]->getInfo() << endl;
+    for (int i = 0; i < this->chaine.longueur(); i++) {
+      cout << chaine.element(i)->getInfo() << endl;
     }
     cout << endl;
   };
 
   void rechercherMedia(string media, string titre, string artiste, int annee) {
-    for (int i = 0; i < this->nbrMedias; i++) {
-      if (this->medias[i]->getGenre() == media &&
-          this->medias[i]->getTitre() == titre &&
-          this->medias[i]->getArtiste() == artiste &&
-          this->medias[i]->getAnnee() == annee) {
+    for (int i = 0; i < this->chaine.longueur(); i++) {
+      if (this->chaine.element(i)->getGenre() == media &&
+          this->chaine.element(i)->getTitre() == titre &&
+          this->chaine.element(i)->getArtiste() == artiste &&
+          this->chaine.element(i)->getAnnee() == annee) {
         cout << "Le media demandé existe bien dans la bibliothèque: " << endl;
-        cout << this->medias[i]->getInfo() << endl;
+        cout << this->chaine.element(i)->getInfo() << endl;
         return;
       }
     }
