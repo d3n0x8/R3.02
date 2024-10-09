@@ -40,12 +40,12 @@ public:
   void afficherMedia() {
     if (this->chaine.longueur() == 0) {
       cout << "\n------------------------------" << endl;
-      cout << "  La bibliothèque est vide !" << endl;
+      cout << "  La mediatheque est vide !" << endl;
       cout << "------------------------------\n" << endl;
       return;
     }
     cout << "\n------------------------------" << endl;
-    cout << "      Liste des chaine.element(i) " << endl;
+    cout << "      Liste des medias " << endl;
     cout << "------------------------------\n" << endl;
     for (int i = 0; i < this->chaine.longueur(); i++) {
       cout << chaine.element(i)->getInfo() << endl;
@@ -59,7 +59,7 @@ public:
           this->chaine.element(i)->getTitre() == titre &&
           this->chaine.element(i)->getArtiste() == artiste &&
           this->chaine.element(i)->getAnnee() == annee) {
-        cout << "Le media demandé existe bien dans la bibliothèque: " << endl;
+        cout << "Le media demandé existe bien dans la mediatheque: " << endl;
         cout << this->chaine.element(i)->getInfo() << endl;
         return;
       }

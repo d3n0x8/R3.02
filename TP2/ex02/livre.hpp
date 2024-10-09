@@ -25,7 +25,8 @@ public:
   int getAnnee() const override { return this->anneeParution; };
   string getGenre() const override { return "Livre"; };
   string getInfo() const override {
-    return "Titre livre: " + titre + ", Auteur: " + auteur +
+    return "Media: " + getGenre() + ", Titre: " + titre +
+           ", Auteur: " + auteur +
            ", Annee de parution: " + to_string(anneeParution) +
            ", Nombre de pages: " + to_string(nbrPages);
   };

@@ -25,8 +25,9 @@ public:
   int getAnnee() const override { return this->anneeParution; };
   string getGenre() const override { return "DVD"; };
   string getInfo() const override {
-    return "Titre DVD: " + titre + ", Realisateur: " + realisateur +
+    return "Media: " + getGenre() + ", Titre: " + titre +
+           ", Realisateur: " + realisateur +
            ", Annee de parution: " + to_string(anneeParution) +
-           ", Durée du film: " + to_string(duree);
+           ", Durée du film: " + to_string(duree) + " minutes";
   };
 };

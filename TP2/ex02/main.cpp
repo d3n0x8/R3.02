@@ -1,15 +1,27 @@
 #include "mediatheque.hpp"
 #include <algorithm>
 #include <cstdio>
+#include <cstdlib>
 #include <iostream>
+#include <limits>
+
+void attendreAppuiTouche() {
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  std::cin.get();
+  system("clear");
+}
 
 int menu() {
   int choix;
-  cout << "1 - Afficher l'ensemble des media de la bibliothèque" << endl;
-  cout << "2 - Ajouter un nouveau media" << endl;
-  cout << "3 - Supprimer un media" << endl;
-  cout << "4 - Recherche un media (par le titre)" << endl;
-  cout << "5 - Quitter" << endl;
+  cout << " ----------------------------------- " << endl;
+  cout << "|         MENU PRINCIPAL            |" << endl;
+  cout << " ----------------------------------- " << endl;
+  cout << "| 1 - Afficher l'ensemble des medias|" << endl;
+  cout << "| 2 - Ajouter un nouveau media      |" << endl;
+  cout << "| 3 - Supprimer un media            |" << endl;
+  cout << "| 4 - Rechercher un media           |" << endl;
+  cout << "| 5 - Quitter                       |" << endl;
+  cout << " ----------------------------------- " << endl;
   cout << "Choisissez une option: ";
   cin >> choix;
 
@@ -146,6 +158,7 @@ void rechercherMedia(Mediatheque &mediatheque) {
 }
 
 int main() {
+  system("clear");
   Mediatheque mediatheque = Mediatheque();
   string titre, auteur, realisateur, chanteur, media, artiste, type;
   int anneeParution, nbrPages, nbrTitres, duree;
@@ -200,6 +213,7 @@ int main() {
       cout << "Choix invalide" << endl;
       break;
     }
+    attendreAppuiTouche();
     choix = menu();
   }
   return 0;

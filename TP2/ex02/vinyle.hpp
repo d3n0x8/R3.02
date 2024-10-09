@@ -26,7 +26,8 @@ public:
   string getGenre() const override { return "Vinyle"; };
 
   string getInfo() const override {
-    return "Titre vinyle: " + titre + ", Chanteur: " + chanteur +
+    return "Media: " + getGenre() + ", Titre: " + titre +
+           ", Chanteur: " + chanteur +
            ", Annee de parution: " + to_string(anneeParution) +
            ", Nombre de titres: " + to_string(nbrTitres);
   };
