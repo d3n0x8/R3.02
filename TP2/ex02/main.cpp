@@ -144,6 +144,7 @@ void rechercherMedia(Mediatheque &mediatheque) {
   media = formaterMedia(media);
   mediatheque.rechercherMedia(media, titre, artiste, anneeParution);
 }
+
 int main() {
   Mediatheque mediatheque = Mediatheque();
   string titre, auteur, realisateur, chanteur, media, artiste, type;
